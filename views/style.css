@@ -40,6 +40,8 @@ html {
   position: absolute;
   top: 50%;
   left: 50%;
+
+  color: #333333;
   
   -webkit-transform: translate(-50%, -50%);
 }
@@ -90,7 +92,11 @@ html {
 }
 
 #footer a {
-  text-transform: uppercase;
   color: #fafafa;
+  font-weight: bold;
+}
+
+a {
+  text-transform: uppercase;
   text-decoration: none;
 }
