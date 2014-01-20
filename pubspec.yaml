@@ -1,0 +1,5 @@
+name:  world_problems
+description: World problems app.
+dependencies:
+  browser: any
+#  unittest: any
