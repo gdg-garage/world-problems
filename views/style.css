@@ -9,8 +9,8 @@ html {
   min-height: 100%;
   background: -webkit-linear-gradient(
     135deg,
-    #333333  0%, #333333  50%,
-    #fafafa 50%, #fafafa 100%
+    #eee  0%, #ddd  50%,
+    #eee 50%, #fff 100%
   );
 
   font-family: Helvetica, sans-serif;
@@ -18,16 +18,16 @@ html {
 }
 
 .button {
-  height: 72px;
-  width: 72px;
+  height: 6em;
+  width: 6em;
 
   position: absolute;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
 
-  background-color: #fafafa;
-  border: 4px solid #333333;
+  background-color: lightskyblue;
+  border: 1em solid #ddd;
   border-radius: 100%;
 
   font-size: 12pt;
@@ -37,8 +37,8 @@ html {
 }
 
 .button:hover {
-  height: 96px;
-  width: 96px;
+  height: 7em;
+  width: 7em;
 
   -webkit-transition: .1s ease-out;
 }
@@ -48,7 +48,7 @@ html {
   top: 50%;
   left: 50%;
 
-  color: #333333;
+  color: white;
   
   -webkit-transform: translate(-50%, -50%);
 }
@@ -65,7 +65,7 @@ html {
   bottom: 10%;
   right: 10%;
 
-  color: #fafafa;
+  color: #333333;
   text-align: right;
 }
 
@@ -75,6 +75,12 @@ html {
 
   font-size: 24pt;
   -webkit-hyphens: auto;  
+}
+
+
+a {
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
 #footer {
@@ -103,7 +109,3 @@ html {
   font-weight: bold;
 }
 
-a {
-  text-transform: uppercase;
-  text-decoration: none;
-}
