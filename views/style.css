@@ -14,7 +14,6 @@ html {
   );
 
   font-family: Helvetica, sans-serif;
-  font-weight: bold;
 }
 
 .button {
@@ -53,6 +52,10 @@ html {
   -webkit-transform: translate(-50%, -50%);
 }
 
+.title {
+  font-size: 50%;
+}
+
 .first-world {
   top: 10%;
   left: 10%;
@@ -77,8 +80,24 @@ html {
   -webkit-hyphens: auto;  
 }
 
+.text {
+  font-weight: bold;
+}
 
-a {
+.author {
+  display: inline;
+  font-size: 50%;
+}
+
+.source {
+  display: inline;
+  font-size: 50%;
+}
+
+
+
+.source a {
+  color: lightskyblue;
   text-transform: uppercase;
   text-decoration: none;
 }
