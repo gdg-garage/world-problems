@@ -1,4 +1,4 @@
 library world_problems;
 
-import "src/view/problem_view.dart";
+part "src/world_problems_app.dart";
 

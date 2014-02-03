@@ -8,26 +8,16 @@ void main() {
   useHtmlConfiguration();
   
   group("World Problems", () {
-    ProblemsApp app;
+    WorldProblemsApp worldApplication;
     
     setUp(() {
-//      Element button = new ButtonElement();
-//      var el1 = new DivElement();
-//      var el2 = new DivElement();
-      var pageView = new PageView(el1, el2, button);
-      var fetcher = new Fetcher("heegergeer");
-      app = new ProblemsApp(pageView, fetcher);
+      worldApplication = new WorldProblemsApp();
     });    
     
-//    test("start of app", () {
-//      Element el = new ParagraphElement();
-//      var pModel = new ProblemModel();
-//      var pView = new ProblemView(el, pModel);
-//      pView.render();
-//    });
-    
     test("start of app", () {
-      expect(app.start(), returnsNormally);
+      expect(worldApplication.start(), returnsNormally);
     });
+    
+    
   });
 }
