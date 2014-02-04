@@ -53,7 +53,13 @@ html {
 }
 
 .title {
+  color: #333;
   font-size: 50%;
+  margin-bottom: 0.5em;
+}
+
+.title span {
+  /* Nothing until we find something very decent and non-distracting. */
 }
 
 .first-world {
@@ -84,14 +90,23 @@ html {
   font-weight: bold;
 }
 
+.problem-footer {
+  margin-top: 0.5em;
+  width: 80%;
+  line-height: 0.4em;
+  color: #999;
+}
+
+.third-world .problem-footer {
+  margin-left: 20%;
+}
+
 .author {
-  display: inline;
   font-size: 50%;
 }
 
 .source {
-  display: inline;
-  font-size: 50%;
+  font-size: 40%;
 }
 
 
