@@ -14,8 +14,8 @@ class WorldProblemsApp {
   
 	void initialize(String buttonId, String firstId, String thirdId) { 
 	  Element reload = querySelector(buttonId);
-	  Element first = querySelector(buttonId);
-	  Element second = querySelector(buttonId);
+	  Element first = querySelector(firstId);
+	  Element second = querySelector(thirdId);
 	  page = new PageView(reload, first, second);
 	  reload.onClick.listen((_) {
   	 refreshPair();
