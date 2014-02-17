@@ -3,6 +3,7 @@ part of world_problems;
 class WorldProblemsApp {
    
   Fetcher fetcher;
+  PageView page;
   bool isInitialize;
   
   WorldProblemsApp(this.fetcher){   
@@ -11,6 +12,7 @@ class WorldProblemsApp {
   
 	void initialize(String buttonId) { 
 	  Element reload = querySelector(buttonId);
+	  page = new PageView(reload, first, second);
 	  reload.onClick.listen((_) {
   	 refreshPair();
 	  });   
@@ -26,16 +28,18 @@ class WorldProblemsApp {
   }
   
   void refreshPair() {
-    WorldProblemsPair pair = getRandomPair();
-    updatePage(pair); 
+    getRandomPair()
+      .then((WorldProblemsPair pair) {
+        updatePage(pair);           
+      });
   }
   
-  WorldProblemsPair getRandomPair() {
+  Future<WorldProblemsPair> getRandomPair() {
     
   }
   
   void updatePage(WorldProblemsPair pair) {
-    
+    page.update(pair);
   }
   
   
