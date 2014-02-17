@@ -1,13 +1,11 @@
 import "package:world_problems/world_problems.dart";
 
-import "dart:html";
-
 main() {
-  String fetchUrl = "";
+  String fetchUrl = "../test/data/sample_data.json";
   Fetcher fetcher = new Fetcher(fetchUrl);
   
   WorldProblemsApp app = new WorldProblemsApp(fetcher);  
-  app.initialize('#reload-button'); 
+  app.initialize('#reload-button', '.first-world', '.third-world'); 
   app.start();
 }
 
