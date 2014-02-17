@@ -1,28 +1,30 @@
 part of world_problems;
 
 class Fetcher {
-  /// Top-level URL of the API.
-  final String url;
+
+  final String apiUrl;
   
-  Fetcher(this.url);
+  Fetcher(this.apiUrl);
   
   Future<WorldProblemsPair> fetchRandom([Iterable<WorldProblem> ignore]) {
     var completer = new Completer();
     
-    HttpRequest.getString(url)
-      .then((String json) {
-        print(json.length);
-        List<Map> list = JSON.decode(json);
-        assert(list.length == 2);
-        var first = new WorldProblem.fromMap(list[0]);
-        var third = new WorldProblem.fromMap(list[1]);
-        var problems = new WorldProblemsPair(first, third);
-        completer.complete(problems);
+    HttpRequest.getString(apiUrl)
+      .then((String json) {       
+        var problemPair = parseList(convertJsonToList(json));
+        completer.complete(problemPair);
       });
-//      .catchError((Error error) {
-//        print(error.toString());
-//      });
     
     return completer.future;
+  }
+  
+  List<Map> convertJsonToList(String json) {
+    return JSON.decode(json); 
+  }
+  
+  WorldProblemsPair parseList(list) {
+    var firstProblem = new WorldProblem.fromMap(list[0]);
+    var thirdProblem = new WorldProblem.fromMap(list[1]);
+    return new WorldProblemsPair(firstProblem, thirdProblem);
   }
 }
