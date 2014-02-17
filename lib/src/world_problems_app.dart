@@ -10,8 +10,10 @@ class WorldProblemsApp {
     isInitialize = false;
   } 
   
-	void initialize(String buttonId) { 
+	void initialize(String buttonId, String firstId, String thirdId) { 
 	  Element reload = querySelector(buttonId);
+	  Element first = querySelector(buttonId);
+	  Element second = querySelector(buttonId);
 	  page = new PageView(reload, first, second);
 	  reload.onClick.listen((_) {
   	 refreshPair();
