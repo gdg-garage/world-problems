@@ -35,7 +35,7 @@ class WorldProblemsApp {
   }
   
   Future<WorldProblemsPair> getRandomPair() {
-    
+    return fetcher.fetchRandom();
   }
   
   void updatePage(WorldProblemsPair pair) {
