@@ -1,20 +1,50 @@
+
 package com.google.devrel.samples.helloendpoints;
 
 public class Problem {
 
-  public String message;
+	private int id;
+	private String text;
+	private String author;
+	private String source;
+	private String url;
+	private String submitter;
 
-  public Problem() {};
+	public Problem() {
+	};
 
-  public Problem(String message) {
-    this.message = message;
-  }
+	public Problem(int id,  String text, String author, String source, String url, String submitter) {
+		this.id =  id;
+		this.text = text;
+		this.author = author;
+		this.source = source;
+		this.url = url;
+		this.submitter = submitter;
+	}
 
-  public String getMessage() {
-    return message;
-  }
 
-  public void setMessage(String message) {
-    this.message = message;
-  }
+	public int getId() {
+		return id;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public String getSubmitter() {
+		return submitter;
+	}
+
 }
