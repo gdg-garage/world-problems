@@ -1,6 +1,9 @@
 packages
 pubspec.lock
 build/
+src/main/world-problems-frontend/build
+src/main/webapp/index.html
+src/main/webapp/world_problems.dart*
 hotspot.log
 *.iml
 *.ipr
