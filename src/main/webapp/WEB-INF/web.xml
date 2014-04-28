@@ -4,7 +4,7 @@
         <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
         <init-param>
             <param-name>services</param-name>
-            <param-value>com.google.devrel.samples.helloendpoints.Greetings</param-value>
+            <param-value>io.github.gdggarage.worldproblems.ProblemsApi</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

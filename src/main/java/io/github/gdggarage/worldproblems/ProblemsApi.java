@@ -1,5 +1,5 @@
 
-package com.google.devrel.samples.helloendpoints;
+package io.github.gdggarage.worldproblems;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,15 +9,16 @@ import java.util.Random;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
-import com.google.devrel.samples.helloendpoints.entity.Document;
-import com.google.devrel.samples.helloendpoints.entity.Entry;
 import com.google.gson.Gson;
+import io.github.gdggarage.worldproblems.entity.Problem;
+import io.github.gdggarage.worldproblems.parse.Document;
+import io.github.gdggarage.worldproblems.parse.Entry;
 
 /**
  * Defines v1 of a helloworld API, which provides simple "greeting" methods.
  */
 @Api(name = "problems", version = "v1")
-public class Greetings {
+public class ProblemsApi {
 
 	@ApiMethod(path = "random")
 	public Problem getRandom() throws IOException {
@@ -26,8 +27,6 @@ public class Greetings {
 		Document doc = new Gson().fromJson(reader, Document.class);
 		int pos = new Random().nextInt(doc.getEntries().size());
 		Entry e = doc.getEntries().get(pos);
-
-
 		return new Problem(e.getId(), e.getText(), e.getAuthor(), e.getSource(), e.getUrl(), e.getSubmitter());
 	}
 }

@@ -1,4 +1,4 @@
-package com.google.devrel.samples.helloendpoints.entity;
+package io.github.gdggarage.worldproblems.parse;
 
 import java.util.List;
 

@@ -1,5 +1,5 @@
 
-package com.google.devrel.samples.helloendpoints;
+package io.github.gdggarage.worldproblems.entity;
 
 public class Problem {
 

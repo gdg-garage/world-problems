@@ -1,5 +1,5 @@
 
-package com.google.devrel.samples.helloendpoints.entity;
+package io.github.gdggarage.worldproblems.parse;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -49,9 +49,5 @@ public class Entry {
 	public String getSubmitter() {
 		return submitter.value;
 	}
-
-
-
-
 
 }
