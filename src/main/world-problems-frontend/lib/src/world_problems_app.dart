@@ -5,11 +5,14 @@ class WorldProblemsApp {
   Fetcher fetcher;
   PageView page;
   bool isInitialized;
-  Queue<WorldProblem> problemsHistory; 
+  Queue<WorldProblem> firstProblemsHistory;
+  Queue<WorldProblem> thirdProblemsHistory;
+  final int maxHistory;
   
-  WorldProblemsApp(this.fetcher){   
+  WorldProblemsApp(this.fetcher, {this.maxHistory: 1}){   
     isInitialized = false;
-    problemsHistory = new Queue();
+    firstProblemsHistory = new Queue();
+    thirdProblemsHistory = new Queue();
   } 
   
 	void initialize(String buttonId, String firstId, String thirdId) { 
@@ -18,7 +21,6 @@ class WorldProblemsApp {
 	  Element second = querySelector(thirdId);
 	  page = new PageView(reload, first, second);
 	  reload.onClick.listen((MouseEvent ev) {
-	    print("Reload clicked.");
   	  refreshPair();
   	  ev.preventDefault();  // Prevent from reloading the page.
 	  });   
@@ -36,21 +38,23 @@ class WorldProblemsApp {
   void refreshPair() {
     getRandomPair()
       .then((WorldProblemsPair pair) {
-        print("Pair fetched.");
         updatePage(pair);           
       });
   }
   
   Future<WorldProblemsPair> getRandomPair() {
-    fetcher.fetchRandom(problemsHistory)
+    return fetcher.fetchRandom(firstProblemsHistory, thirdProblemsHistory)
       .then((WorldProblemsPair pair) {
-        problemsHistory.add(pair.firstProblem);
-        problemsHistory.add(pair.thirdProblem);
+        firstProblemsHistory.addLast(pair.firstProblem);
+        if (firstProblemsHistory.length > maxHistory) {
+          firstProblemsHistory.removeFirst();
+        }
+        thirdProblemsHistory.addLast(pair.thirdProblem);
+        if (thirdProblemsHistory.length > maxHistory) {
+          thirdProblemsHistory.removeFirst();
+        }
         return pair;
     });
-    
-    
-    return fetcher.fetchRandom();
   }
   
   void updatePage(WorldProblemsPair pair) {
