@@ -2,8 +2,6 @@ import "package:unittest/unittest.dart";
 import "package:world_problems/world_problems.dart";
 import "package:unittest/html_config.dart";
 
-import "dart:html";
-
 void main() {
   useHtmlConfiguration();
   
@@ -11,7 +9,9 @@ void main() {
     WorldProblemsApp worldApplication;
     
     setUp(() {
-      worldApplication = new WorldProblemsApp();
+      String url = "data/sample_data.json";
+      var fetcher = new Fetcher(url);
+      worldApplication = new WorldProblemsApp(fetcher);
     });    
     
     test("start of app", () {

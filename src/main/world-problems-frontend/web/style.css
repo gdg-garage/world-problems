@@ -1,0 +1,145 @@
+/* @override http://127.0.0.1:3030/world-problems/views/style.css */
+
+/* html5doctor.com Reset v1.6.1 - http://cssreset.com */
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{background-color:#ff9;color:#000;text-decoration:none}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}input,select{vertical-align:middle}
+
+
+
+html {
+  min-height: 100%;
+  background: -webkit-linear-gradient(
+    135deg,
+    #eee  0%, #ddd  50%,
+    #eee 50%, #fff 100%
+  );
+
+  font-family: Helvetica, sans-serif;
+}
+
+.button {
+  height: 6em;
+  width: 6em;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+
+  background-color: lightskyblue;
+  border: 1em solid #ddd;
+  border-radius: 100%;
+
+  font-size: 12pt;
+  -webkit-user-select: none;
+
+  -webkit-transition: .1s ease-out;
+}
+
+.button:hover {
+  height: 7em;
+  width: 7em;
+
+  -webkit-transition: .1s ease-out;
+}
+
+.button a {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  color: white;
+  
+  -webkit-transform: translate(-50%, -50%);
+}
+
+.title {
+  color: #333;
+  font-size: 50%;
+  margin-bottom: 0.5em;
+}
+
+.title span {
+  /* Nothing until we find something very decent and non-distracting. */
+}
+
+.first-world {
+  top: 10%;
+  left: 10%;
+
+  color: #333333;
+  text-align: left;
+}
+
+.third-world {
+  bottom: 10%;
+  right: 10%;
+
+  color: #333333;
+  text-align: right;
+}
+
+.problem {
+  position: absolute;
+  width: 33%;
+
+  font-size: 24pt;
+  -webkit-hyphens: auto;  
+}
+
+.text {
+  font-weight: bold;
+}
+
+.problem-footer {
+  margin-top: 0.5em;
+  width: 80%;
+  line-height: 0.4em;
+  color: #999;
+}
+
+.third-world .problem-footer {
+  margin-left: 20%;
+}
+
+.author {
+  font-size: 50%;
+}
+
+.source {
+  font-size: 40%;
+}
+
+
+
+.source a {
+  color: lightskyblue;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+#footer {
+  width: 100%;
+  height: 36px;
+
+  position: fixed;
+  bottom: 0;
+
+  color: #888888;
+  font-weight: normal;
+  font-size: 10pt;
+}
+
+#footer span {
+  position: relative;
+  top: 50%;
+  right: 18px;
+  -webkit-transform: translate(0, -50%);
+
+  float: right;
+}
+
+#footer a {
+  color: #fafafa;
+  font-weight: bold;
+}
+

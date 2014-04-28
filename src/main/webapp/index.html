@@ -1,85 +1,43 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <title>Hello Endpoints!</title>
-    <script type="text/javascript" src="/js/base.js"></script>
-    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <style type="text/css">
-        body {
-            padding-top: 40px;
-            padding-bottom: 40px;
-            background-color: #f5f5f5;
-        }
-        blockquote {
-            margin-bottom: 10px;
-            border-left-color: #bbb;
-        }
-        form {
-            margin-top: 10px;
-        }
-        .form-signin input[type="text"] {
-            font-size: 16px;
-            height: auto;
-            margin-bottom: 15px;
-            padding: 7px 9px;
-        }
-        .row {
-            margin-left: 0px;
-            margin-top: 10px;
-            overflow: scroll;
-        }
-    </style>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>WorldProblems</title>
+  <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8">
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="#">Hello Endpoints!</a>
-            <div class="nav-collapse collapse pull-right">
-                <a href="javascript:void(0);" class="btn" id="signinButton">Sign in</a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container">
-
-    <div id="outputLog"></div>
-
-    <form action="javascript:void(0);">
-        <h2>Get Greeting</h2>
-        <div><span style="width: 90px; display: inline-block;">Greeting ID: </span><input id="id" /></div>
-        <div><input id="getGreeting" type="submit" class="btn btn-small" value="Submit"></div>
-    </form>
-    
-    <form action="javascript:void(0);">
-        <h2>List Greetings</h2>
-        <div><input id="listGreeting" type="submit" class="btn btn-small" value="Submit"></div>
-    </form>
-    
-    <form action="javascript:void(0);">
-        <h2>Multiply Greetings</h2>
-        <div><span style="width: 90px; display: inline-block;">Greeting: </span><input id="greeting" /></div>
-        <div><span style="width: 90px; display: inline-block;">Count: </span><input id="count" /></div>
-        <div><input id="multiplyGreetings" type="submit" class="btn btn-small" value="Submit"></div>
-    </form>
-    
-    <form action="javascript:void(0);">
-        <h2>Authenticated Greeting</h2>
-        <div><input id="authedGreeting" type="submit" class="btn btn-small" disabled value="Submit"></div>
-    </form>
-
-    <script type="text/javascript">
-        function init() {
-            google.devrel.samples.hello.init('//' + window.location.host + '/_ah/api');
-        }
-    </script>
-    <script src="https://apis.google.com/js/client.js?onload=init"></script>
-</div>
+  <div class="first-world problem">
+    <p class="title">#<span>first</span>worldproblem</p>
+    <p class="text">
+      Asked for the all black 5s &amp; got the gold one I hate my parents smfh I hate my life guess I'm staying with the 5 http://pic.twitter.com/jMA40WXrXy
+    </p>
+    <p class="problem-footer">
+      <span class="author">
+        &mdash; ronald h
+      </span>
+      <span class="source">
+        <a class="url" href="https://twitter.com/ogronald/status/415707014875348992">Twitter</a>
+      </span>
+    </p>
+  </div>
+  <div class="button">
+    <a id="reload-button" href="indexdev.html">RELOAD</a>
+  </div>
+  <div class="third-world problem">
+    <p class="title">#<span>third</span>worldproblem</p>
+    <p class="text">
+      My baby has a 1/7 chance it will die before it is 1 year old.
+    </p>
+    <p class="problem-footer">
+      <span class="author">
+        &mdash; an average woman in Afghanistan
+      </span>
+      <span class="source">
+        <a class="url" href="http://en.wikipedia.org/wiki/List_of_countries_by_infant_mortality_rate">Wikipedia</a>
+      </span>
+    </p>
+  </div>
+<script type="application/dart" src="world_problems.dart"></script>
+<script src="packages/browser/dart.js"></script>
 </body>
 </html>
