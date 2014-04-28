@@ -10,7 +10,7 @@ class Fetcher {
     var completer = new Completer();
     
     HttpRequest.getString(apiUrl)
-      .then((String json) {       
+      .then((String json) {
         var problemPair = parseList(convertJsonToList(json));
         completer.complete(problemPair);
       });
@@ -19,7 +19,8 @@ class Fetcher {
   }
   
   List<Map> convertJsonToList(String json) {
-    return JSON.decode(json); 
+    Map<String,List> itemsMap = JSON.decode(json);
+    return itemsMap["items"];
   }
   
   WorldProblemsPair parseList(list) {

@@ -4,11 +4,11 @@ class WorldProblemsApp {
    
   Fetcher fetcher;
   PageView page;
-  bool isInitialize;
+  bool isInitialized;
   Queue<WorldProblem> problemsHistory; 
   
   WorldProblemsApp(this.fetcher){   
-    isInitialize = false;
+    isInitialized = false;
     problemsHistory = new Queue();
   } 
   
@@ -17,15 +17,17 @@ class WorldProblemsApp {
 	  Element first = querySelector(firstId);
 	  Element second = querySelector(thirdId);
 	  page = new PageView(reload, first, second);
-	  reload.onClick.listen((_) {
-  	 refreshPair();
+	  reload.onClick.listen((MouseEvent ev) {
+	    print("Reload clicked.");
+  	  refreshPair();
+  	  ev.preventDefault();  // Prevent from reloading the page.
 	  });   
-	  isInitialize = true;
+	  isInitialized = true;
   }
 	
   void start() { 
-    if (!isInitialize) {
-      throw new Exception("Worl problems not initialized");
+    if (!isInitialized) {
+      throw new Exception("World problems not initialized");
     }
     
     refreshPair();
@@ -34,6 +36,7 @@ class WorldProblemsApp {
   void refreshPair() {
     getRandomPair()
       .then((WorldProblemsPair pair) {
+        print("Pair fetched.");
         updatePage(pair);           
       });
   }
@@ -53,6 +56,4 @@ class WorldProblemsApp {
   void updatePage(WorldProblemsPair pair) {
     page.update(pair);
   }
-  
-  
 }
