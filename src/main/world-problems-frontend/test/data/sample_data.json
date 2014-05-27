@@ -1,18 +1,17 @@
-[
-    {
-      "id": 1,
-      "text": "Asked for the all black 5s & got the gold one I hate my parents smfh I hate my life guess I'm staying with the 5 http://pic.twitter.com/jMA40WXrXy",
-      "author": "ronald h",
-      "source": "Twitter",
-      "url": "https://twitter.com/ogronald/status/415707014875348992",
-      "submitter": "filiph"
-    },
-    {
-      "id": 2,
-      "text": "My baby has a 1/7 chance it will die before it is 1 year old.",
-      "author": "an average woman in Afghanistan",
-      "source": "Wikipedia",
-      "url": "http://en.wikipedia.org/wiki/List_of_countries_by_infant_mortality_rate",
-      "submitter": "filiph"
-    }
-]
+{
+  "items" : [ {
+    "id" : 4,
+    "text" : "i could really go for fiji water, but like i need to belt tighten and save every penny. i have to get like wal mart brand water i guess. [...] what the hell this is no way 2 live.",
+    "author" : "anonymous",
+    "source" : "White Whine",
+    "url" : "http://whitewhine.com/post/83635891878/isnt-that-what-art-is",
+    "submitter" : "filiph"
+  }, {
+    "id" : 1,
+    "text" : "My baby has a 1/7 chance it will die before it is 1 year old.",
+    "author" : "an average woman in Afghanistan",
+    "source" : "Wikipedia",
+    "url" : "http://en.wikipedia.org/wiki/List_of_countries_by_infant_mortality_rate",
+    "submitter" : "filiph"
+  } ]
+}

@@ -9,18 +9,23 @@ class WorldProblemsApp {
   Queue<WorldProblem> thirdProblemsHistory;
   final int maxHistory;
   
+  DivElement _reloadDiv;
+  AnchorElement reload;
+  
   WorldProblemsApp(this.fetcher, {this.maxHistory: 1}){   
     isInitialized = false;
     firstProblemsHistory = new Queue();
     thirdProblemsHistory = new Queue();
-  } 
+  }
   
 	void initialize(String buttonId, String firstId, String thirdId) { 
-	  Element reload = querySelector(buttonId);
+	  reload = querySelector(buttonId);
+	  _reloadDiv = querySelector(".button");  // TODO: setting
 	  Element first = querySelector(firstId);
 	  Element second = querySelector(thirdId);
 	  page = new PageView(reload, first, second);
 	  reload.onClick.listen((MouseEvent ev) {
+	    _reloadDiv.classes.add("rotateOut");
   	  refreshPair();
   	  ev.preventDefault();  // Prevent from reloading the page.
 	  });   
@@ -38,7 +43,8 @@ class WorldProblemsApp {
   void refreshPair() {
     getRandomPair()
       .then((WorldProblemsPair pair) {
-        updatePage(pair);           
+        updatePage(pair);
+        _reloadDiv.classes.add("fadeIn");
       });
   }
   
