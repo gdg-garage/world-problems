@@ -42,7 +42,7 @@ class WorldProblemsApp {
     getRandomPair()
       .then((WorldProblemsPair pair) {
         updatePage(pair);
-        _reloadDiv.classes.add("fadeIn");
+        _reloadDiv.classes.remove("pulse");
       });
   }
   

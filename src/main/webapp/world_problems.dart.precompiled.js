@@ -6645,6 +6645,13 @@ var $$ = {};
     add$1: function(_, value) {
       return this.modify$1(new P.CssClassSetImpl_add_closure(value));
     },
+    remove$1: function(_, value) {
+      var s, result;
+      s = this.readClasses$0();
+      result = s.remove$1(0, value);
+      this.writeClasses$1(s);
+      return result;
+    },
     modify$1: function(f) {
       var s, ret;
       s = this.readClasses$0();
@@ -6774,7 +6781,7 @@ var $$ = {};
       t2 = t1.page;
       t2.first.update$1(pair.get$firstProblem());
       t2.third.update$1(pair.thirdProblem);
-      J.get$classes$x(t1._reloadDiv).add$1(0, "fadeIn");
+      J.get$classes$x(t1._reloadDiv).remove$1(0, "pulse");
     }
   },
   WorldProblemsApp_getRandomPair_closure: {
