@@ -12,13 +12,6 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 
 html {
   min-height: 100%;
-  /*
-  background: -webkit-linear-gradient(
-    0deg,
-    #eee  0%, #ddd  50%,
-    #eee 50%, #fff 100%
-  );
-  */
   background: #ddd;
 
   font-family: Helvetica, sans-serif;
@@ -34,13 +27,18 @@ html {
 
   background-color: lightskyblue;
   border: 1em solid #ddd;
-  border-radius: 100%;
+  -webkit-border-radius:100%;
+  -moz-border-radius:100%;
+  border-radius:100%;
   
   margin: 0 auto;
   
   text-align: center;
 
-  -webkit-transition: .1s ease-out;
+  -webkit-transition:.1s ease-out;
+  -moz-transition:.1s ease-out;
+  -o-transition:.1s ease-out;
+  transition:.1s ease-out;
 }
 
 .button:hover {
@@ -74,10 +72,11 @@ html {
 }
 
 .first-world {
-  background: -webkit-linear-gradient(
-    90deg,
-    #fff  0%, #ddd  100%
-  );
+  background:-webkit-gradient(linear,50% 100%,50% 0,from(#fff),to(#ddd));
+  background:-webkit-linear-gradient(    90deg,    #fff  0%, #ddd  100%  );
+  background:-moz-linear-gradient(    90deg,    #fff  0%, #ddd  100%  );
+  background:-o-linear-gradient(    90deg,    #fff  0%, #ddd  100%  );
+  background:linear-gradient(    90deg,    #fff  0%, #ddd  100%  );
   
   text-align: left;
   
@@ -85,10 +84,11 @@ html {
 }
 
 .third-world {
-  background: -webkit-linear-gradient(
-    -90deg,
-    #fff  0%, #ddd  100%
-  );
+  background:-webkit-gradient(linear,50% 0,50% 100%,from(#fff),to(#ddd));
+  background:-webkit-linear-gradient(    -90deg,    #fff  0%, #ddd  100%  );
+  background:-moz-linear-gradient(    -90deg,    #fff  0%, #ddd  100%  );
+  background:-o-linear-gradient(    -90deg,    #fff  0%, #ddd  100%  );
+  background:linear-gradient(    -90deg,    #fff  0%, #ddd  100%  );
   
   text-align: right;
 }
