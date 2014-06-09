@@ -6805,7 +6805,6 @@ var $$ = {};
     app.initialize$3("#reload-button", ".first-world", ".third-world");
     if (!app.isInitialized)
       H.throwExpression(P.Exception_Exception("World problems not initialized"));
-    app.refreshPair$0();
   }, "call$0", "main$closure", 0, 0, 9]
 },
 1],
@@ -6822,19 +6821,19 @@ P.String.$isObject = true;
 P.num.$isObject = true;
 P.Duration.$isObject = true;
 P.Object.$isObject = true;
-W.HttpRequest.$isObject = true;
-W.ProgressEvent.$isObject = true;
 W.MouseEvent.$isMouseEvent = true;
 W.MouseEvent.$isObject = true;
+W.HttpRequest.$isObject = true;
+W.ProgressEvent.$isObject = true;
 H.RawReceivePortImpl.$isObject = true;
 H._IsolateEvent.$isObject = true;
 H._IsolateContext.$isObject = true;
-U.WorldProblemsPair.$isWorldProblemsPair = true;
-U.WorldProblemsPair.$isObject = true;
 P.Symbol.$isSymbol = true;
 P.Symbol.$isObject = true;
 P.bool.$isbool = true;
 P.bool.$isObject = true;
+U.WorldProblemsPair.$isWorldProblemsPair = true;
+U.WorldProblemsPair.$isObject = true;
 P.StackTrace.$isStackTrace = true;
 P.StackTrace.$isObject = true;
 P.Function.$isFunction = true;
