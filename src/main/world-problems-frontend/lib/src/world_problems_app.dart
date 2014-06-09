@@ -25,7 +25,7 @@ class WorldProblemsApp {
 	  Element second = querySelector(thirdId);
 	  page = new PageView(reload, first, second);
 	  reload.onClick.listen((MouseEvent ev) {
-	    _reloadDiv.classes.add("rotateOut");
+	    _reloadDiv.classes.add("pulse");
   	  refreshPair();
   	  ev.preventDefault();  // Prevent from reloading the page.
 	  });   
