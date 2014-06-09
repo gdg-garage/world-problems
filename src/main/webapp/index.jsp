@@ -1,8 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="io.github.gdggarage.worldproblems.ProblemsApi" %>
+<%@ page import="io.github.gdggarage.worldproblems.ProblemsWorker" %>
 <%
-ProblemsApi api = new ProblemsApi();
-api.init();
+ProblemsWorker api = new ProblemsWorker();
 %>
 <!DOCTYPE HTML>
 <html>
