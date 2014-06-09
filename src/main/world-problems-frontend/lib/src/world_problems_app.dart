@@ -36,8 +36,6 @@ class WorldProblemsApp {
     if (!isInitialized) {
       throw new Exception("World problems not initialized");
     }
-    
-    refreshPair();
   }
   
   void refreshPair() {
