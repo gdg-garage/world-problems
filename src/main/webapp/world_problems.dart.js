@@ -6762,26 +6762,31 @@ var $$ = {};
       t1 = H.setRuntimeTypeInfo(new P.ListQueue(null, 0, 0, 0), [null]);
       t1.ListQueue$1(null, null);
       this.thirdProblemsHistory = t1;
-    }
+    },
+    static: {"^": "WorldProblemsApp_pulseAnimationDuration"}
   },
   WorldProblemsApp_initialize_closure: {
     "^": "Closure:20;this_0",
     call$1: function(ev) {
       var t1 = this.this_0;
       J.get$classes$x(t1._reloadDiv).add$1(0, "pulse");
+      P.Timer_Timer(C.Duration_1200000, new U.WorldProblemsApp_initialize__closure(t1));
       t1.refreshPair$0();
       J.preventDefault$0$x(ev);
+    }
+  },
+  WorldProblemsApp_initialize__closure: {
+    "^": "Closure:9;this_1",
+    call$0: function() {
+      J.get$classes$x(this.this_1._reloadDiv).remove$1(0, "pulse");
     }
   },
   WorldProblemsApp_refreshPair_closure: {
     "^": "Closure:21;this_0",
     call$1: function(pair) {
-      var t1, t2;
-      t1 = this.this_0;
-      t2 = t1.page;
-      t2.first.update$1(pair.get$firstProblem());
-      t2.third.update$1(pair.thirdProblem);
-      J.get$classes$x(t1._reloadDiv).remove$1(0, "pulse");
+      var t1 = this.this_0.page;
+      t1.first.update$1(pair.get$firstProblem());
+      t1.third.update$1(pair.thirdProblem);
     }
   },
   WorldProblemsApp_getRandomPair_closure: {
@@ -7030,6 +7035,7 @@ C.C_DynamicRuntimeType = new H.DynamicRuntimeType();
 C.C__DelayedDone = new P._DelayedDone();
 C.C__RootZone = new P._RootZone();
 C.Duration_0 = new P.Duration(0);
+C.Duration_1200000 = new P.Duration(1200000);
 C.EventStreamProvider_click = new W.EventStreamProvider("click");
 C.EventStreamProvider_error = new W.EventStreamProvider("error");
 C.EventStreamProvider_load = new W.EventStreamProvider("load");
