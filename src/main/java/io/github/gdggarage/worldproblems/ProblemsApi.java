@@ -70,4 +70,24 @@ public class ProblemsApi {
 		}
 		return new Problem(entry.getId(), entry.getText(), entry.getAuthor(), entry.getSource(), entry.getUrl(), entry.getSubmitter());
 	}
+
+	Problem firstProblem;
+	Problem thirdProblem;
+
+	public void init() {
+		try {
+			firstProblem = getRandom(FIRST_SHEET, -1);
+			thirdProblem = getRandom(SECOND_SHEET, -1);
+		} catch (IOException e) {
+			// ignore
+		}
+	}
+
+	public Problem first() {
+		return firstProblem;
+	}
+
+	public Problem third() {
+		return thirdProblem;
+	}
 }

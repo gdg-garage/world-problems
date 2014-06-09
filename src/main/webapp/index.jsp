@@ -1,3 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="io.github.gdggarage.worldproblems.ProblemsApi" %>
+<%
+ProblemsApi api = new ProblemsApi();
+api.init();
+%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -10,14 +16,14 @@
   <div class="first-world problem">
     <p class="title">#<span>first</span>worldproblem</p>
     <p class="text">
-      Asked for the all black 5s &amp; got the gold one I hate my parents smfh I hate my life guess I'm staying with the 5 http://pic.twitter.com/jMA40WXrXy
+      <%= api.first().getText() %>
     </p>
     <p class="problem-footer">
       <span class="author">
-        &mdash; ronald h
+        &mdash; <%= api.first().getAuthor() %>
       </span>
       <span class="source">
-        <a class="url" href="https://twitter.com/ogronald/status/415707014875348992">Twitter</a>
+        <a class="url" href="<%= api.first().getUrl() %>"><%= api.first().getSource() %></a>
       </span>
     </p>
   </div>
@@ -29,14 +35,14 @@
   <div class="third-world problem">
     <p class="title">#<span>third</span>worldproblem</p>
     <p class="text">
-      My baby has a 1/7 chance it will die before it is 1 year old.
+      <%= api.third().getText() %>
     </p>
     <p class="problem-footer">
       <span class="author">
-        &mdash; an average woman in Afghanistan
+        &mdash; <%= api.third().getAuthor() %>
       </span>
       <span class="source">
-        <a class="url" href="http://en.wikipedia.org/wiki/List_of_countries_by_infant_mortality_rate">Wikipedia</a>
+        <a class="url" href="<%= api.third().getUrl() %>"><%= api.first().getSource() %></a>
       </span>
     </p>
   </div>
