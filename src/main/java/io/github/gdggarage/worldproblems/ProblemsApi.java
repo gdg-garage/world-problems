@@ -37,7 +37,7 @@ public class ProblemsApi {
 		return problems;
 	}
 
-	@ApiMethod(path = "refresh-cache", name = "refresh_cache")
+	@ApiMethod(path = "refresh-cache", name = "refresh_cache", httpMethod = ApiMethod.HttpMethod.GET)
 	public void refreshCache() throws IOException {
 		MemcacheService cache = MemcacheServiceFactory.getMemcacheService();
 		downloadAndSaveToCache(cache, FIRST_SHEET);
