@@ -13,18 +13,20 @@ ProblemsWorker api = new ProblemsWorker();
 </head>
 <body>
   <div class="first-world problem">
-    <p class="title">#<span>first</span>worldproblem</p>
-    <p class="text">
-      <%= api.first().getText() %>
-    </p>
-    <p class="problem-footer">
-      <span class="author">
-        &mdash; <%= api.first().getAuthor() %>
-      </span>
-      <span class="source">
-        <a class="url" href="<%= api.first().getUrl() %>"><%= api.first().getSource() %></a>
-      </span>
-    </p>
+    <div class="problem-wrapper">
+      <p class="title">#<span>first</span>worldproblem</p>
+      <p class="text">
+        <%= api.first().getText() %>
+      </p>
+      <p class="problem-footer">
+        <span class="author">
+          &mdash; <%= api.first().getAuthor() %>
+        </span>
+        <span class="source">
+          <a class="url" href="<%= api.first().getUrl() %>"><%= api.first().getSource() %></a>
+        </span>
+      </p>
+    </div>
   </div>
   <div class="separator">
     <div class="button animated">
@@ -32,18 +34,20 @@ ProblemsWorker api = new ProblemsWorker();
     </div>
   </div>
   <div class="third-world problem">
-    <p class="title">#<span>third</span>worldproblem</p>
-    <p class="text">
-      <%= api.third().getText() %>
-    </p>
-    <p class="problem-footer">
-      <span class="author">
-        &mdash; <%= api.third().getAuthor() %>
-      </span>
-      <span class="source">
-        <a class="url" href="<%= api.third().getUrl() %>"><%= api.first().getSource() %></a>
-      </span>
-    </p>
+    <div class="problem-wrapper">
+      <p class="title">#<span>third</span>worldproblem</p>
+      <p class="text">
+        <%= api.third().getText() %>
+      </p>
+      <p class="problem-footer">
+        <span class="author">
+          &mdash; <%= api.third().getAuthor() %>
+        </span>
+        <span class="source">
+          <a class="url" href="<%= api.third().getUrl() %>"><%= api.first().getSource() %></a>
+        </span>
+      </p>
+    </div>
   </div>
 <script type="application/dart" src="world_problems.dart"></script>
 <script src="packages/browser/dart.js"></script>
