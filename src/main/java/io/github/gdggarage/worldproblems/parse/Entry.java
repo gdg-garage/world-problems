@@ -1,10 +1,12 @@
 
 package io.github.gdggarage.worldproblems.parse;
 
+import java.io.Serializable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Entry {
-	public static class Value {
+public class Entry implements Serializable {
+	public static class Value implements Serializable {
 		@SerializedName("$t")
 		String value;
 	}

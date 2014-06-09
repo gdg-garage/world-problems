@@ -13,6 +13,8 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.DefaultValue;
 import com.google.api.server.spi.config.Named;
+import com.google.appengine.api.memcache.MemcacheService;
+import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.google.gson.Gson;
 import io.github.gdggarage.worldproblems.entity.Problem;
 import io.github.gdggarage.worldproblems.parse.Document;
@@ -21,20 +23,41 @@ import io.github.gdggarage.worldproblems.parse.Entry;
 @Api(name = "problems", version = "v1")
 public class ProblemsApi {
 
+	private static final String FIRST_SHEET = "https://spreadsheets.google.com/feeds/list/0AjP0HrbVsp3KdDRFdHN5TVUweFNHV04zZ0g3T1dTTXc/od6/public/values?alt=json";
+	private static final String SECOND_SHEET = "https://spreadsheets.google.com/feeds/list/0AjP0HrbVsp3KdDRFdHN5TVUweFNHV04zZ0g3T1dTTXc/od7/public/values?alt=json";
+
 	Random random = new Random();
 
-	@ApiMethod(path = "random")
-	public List<Problem> getRandom(@Named("ignore_first") @DefaultValue("-1") int ignoreFirst, @Named("ignore_third") @DefaultValue("-1") int ignoreThird) throws IOException {
+	@ApiMethod(path = "random", name = "random")
+	public List<Problem> getRandom(@Named("ignore_first") @DefaultValue("-1") int ignoreFirst, @Named("ignore_third") @DefaultValue("-1") int
+		ignoreThird) throws IOException {
 		List<Problem> problems = new ArrayList<>();
-		problems.add(getRandom("https://spreadsheets.google.com/feeds/list/0AjP0HrbVsp3KdDRFdHN5TVUweFNHV04zZ0g3T1dTTXc/od6/public/values?alt=json", ignoreFirst));
-		problems.add(getRandom("https://spreadsheets.google.com/feeds/list/0AjP0HrbVsp3KdDRFdHN5TVUweFNHV04zZ0g3T1dTTXc/od7/public/values?alt=json", ignoreThird));
+		problems.add(getRandom(FIRST_SHEET,ignoreFirst));
+		problems.add(getRandom(SECOND_SHEET,ignoreThird));
 		return problems;
 	}
 
-	private Problem getRandom(String spreadsheetUrl, int ignore) throws IOException {
-		URL url = new URL(spreadsheetUrl);
+	@ApiMethod(path = "refresh-cache", name = "refresh_cache")
+	public void refreshCache() throws IOException {
+		MemcacheService cache = MemcacheServiceFactory.getMemcacheService();
+		downloadAndSaveToCache(cache, FIRST_SHEET);
+		downloadAndSaveToCache(cache, SECOND_SHEET);
+	}
+
+	private Document downloadAndSaveToCache(MemcacheService cache, String sheetUrl) throws IOException {
+		URL url = new URL(sheetUrl);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
 		Document doc = new Gson().fromJson(reader, Document.class);
+		cache.put(sheetUrl, doc);
+		return doc;
+	}
+
+	private Problem getRandom(String spreadsheetUrl, int ignore) throws IOException {
+		MemcacheService cache = MemcacheServiceFactory.getMemcacheService();
+		Document doc = (Document) cache.get(spreadsheetUrl);
+		if (doc == null) {
+			doc = downloadAndSaveToCache(cache, spreadsheetUrl);
+		}
 		boolean found = false;
 		Entry entry = null;
 		int size = doc.getEntries().size();
