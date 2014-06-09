@@ -79,6 +79,7 @@ html {
   background:linear-gradient(    0deg,    #fff  0%, #ddd  100%  );
   
   text-align: left;
+  min-height: 10em;
   
   padding-bottom: 5%;
 }
@@ -91,6 +92,7 @@ html {
   background:linear-gradient(    180deg,    #fff  0%, #ddd  100%  );
   
   text-align: right;
+  min-height: 10em;
 }
 
 .first-world .text {
@@ -103,7 +105,6 @@ html {
 
 .problem {
   width: 100%;
-  height: 30%;
 
   color: #333333;
 
