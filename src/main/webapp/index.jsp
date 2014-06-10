@@ -19,7 +19,7 @@ ProblemsWorker api = new ProblemsWorker();
         David Vavra, backend, Java + Cloud Endpoints
         Jirka Penzes, frontend, Dart
         Sindri Avaruus, frontend, HTML/CSS
-        Vit Pleskot, backend, Java + Cloud Endpoints
+        Vit Listik, backend, Java + Cloud Endpoints
         Filip Hracek, frontend, Dart + HTML/CSS
 
       The project was a way for us to try out new things, in true
