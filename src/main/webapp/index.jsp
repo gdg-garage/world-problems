@@ -7,7 +7,7 @@ ProblemsWorker api = new ProblemsWorker();
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>WorldProblems &mash; a GDG Garage Project</title>
+  <title>WorldProblems &mdash; a GDG Garage Project</title>
   <!-- 
       Oh hai. This is a GDG Garage project.
 
