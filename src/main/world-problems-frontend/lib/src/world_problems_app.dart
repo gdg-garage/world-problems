@@ -37,6 +37,9 @@ class WorldProblemsApp {
     });
     isInitialized = true;
   }
+  
+  WorldProblem currentFirst;
+  WorldProblem currentThird;
 
   void start() {
     if (!isInitialized) {
@@ -45,7 +48,10 @@ class WorldProblemsApp {
   }
 
   void refreshPair() {
+    page.startReloadTweening();
     getRandomPair().then((WorldProblemsPair pair) {
+      currentFirst = pair.firstProblem;
+      currentThird = pair.thirdProblem;
       updatePage(pair);
     });
   }

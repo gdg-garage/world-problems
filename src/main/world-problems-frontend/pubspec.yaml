@@ -1,5 +1,6 @@
-name:  world_problems
+name: world_problems
 description: World problems app.
 dependencies:
   browser: any
+  text_interpolate: any
   unittest: any

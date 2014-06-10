@@ -564,6 +564,9 @@ var $$ = {};
         return result;
       return result.substring(startIndex, endIndex0);
     },
+    get$runes: function(receiver) {
+      return new P.Runes(receiver);
+    },
     get$isEmpty: function(receiver) {
       return receiver.length === 0;
     },
@@ -1773,6 +1776,29 @@ var $$ = {};
   },
   TimerImpl: {
     "^": "Object;_once,_inEventLoop,_handle",
+    cancel$0: function() {
+      if ($.get$globalThis().setTimeout != null) {
+        if (this._inEventLoop)
+          throw H.wrapException(P.UnsupportedError$("Timer in event loop cannot be canceled."));
+        if (this._handle == null)
+          return;
+        H.leaveJsAsync();
+        if (this._once)
+          $.get$globalThis().clearTimeout(this._handle);
+        else
+          $.get$globalThis().clearInterval(this._handle);
+        this._handle = null;
+      } else
+        throw H.wrapException(P.UnsupportedError$("Canceling a timer."));
+    },
+    TimerImpl$periodic$2: function(milliseconds, callback) {
+      var t1 = $.get$globalThis();
+      if (t1.setTimeout != null) {
+        ++init.globalState.topEventLoop._activeJsAsyncCount;
+        this._handle = t1.setInterval(H.convertDartClosureToJS(new H.TimerImpl$periodic_closure(this, callback), 0), milliseconds);
+      } else
+        throw H.wrapException(P.UnsupportedError$("Periodic timer."));
+    },
     TimerImpl$2: function(milliseconds, callback) {
       var t1, t2;
       if (milliseconds === 0)
@@ -1798,6 +1824,10 @@ var $$ = {};
         var t1 = new H.TimerImpl(true, false, null);
         t1.TimerImpl$2(milliseconds, callback);
         return t1;
+      }, TimerImpl$periodic: function(milliseconds, callback) {
+        var t1 = new H.TimerImpl(false, false, null);
+        t1.TimerImpl$periodic$2(milliseconds, callback);
+        return t1;
       }}
   },
   TimerImpl_internalCallback: {
@@ -1813,6 +1843,12 @@ var $$ = {};
       this.this_2._handle = null;
       H.leaveJsAsync();
       this.callback_3.call$0();
+    }
+  },
+  TimerImpl$periodic_closure: {
+    "^": "Closure:9;this_0,callback_1",
+    call$0: function() {
+      this.callback_1.call$1(this.this_0);
     }
   },
   CapabilityImpl: {
@@ -1900,12 +1936,14 @@ var $$ = {};
   },
   Primitives_stringFromCharCode: function(charCode) {
     var bits;
+    if (typeof charCode !== "number")
+      return H.iae(charCode);
     if (0 <= charCode) {
       if (charCode <= 65535)
         return String.fromCharCode(charCode);
       if (charCode <= 1114111) {
         bits = charCode - 65536;
-        return String.fromCharCode((55296 | C.JSInt_methods._shrOtherPositive$1(bits, 10)) >>> 0, 56320 | bits & 1023);
+        return String.fromCharCode((55296 | C.JSNumber_methods._shrOtherPositive$1(bits, 10)) >>> 0, (56320 | bits & 1023) >>> 0);
       }
     }
     throw H.wrapException(P.RangeError$range(charCode, 0, 1114111));
@@ -3329,6 +3367,14 @@ var $$ = {};
     }
     return P._rootCreateTimer(t1, null, t1, duration, t1.bindCallback$2$runGuarded(callback, true));
   },
+  Timer_Timer$periodic: function(duration, callback) {
+    var t1 = $.Zone__current;
+    if (t1 === C.C__RootZone) {
+      t1.toString;
+      return P._rootCreatePeriodicTimer(t1, null, t1, duration, callback);
+    }
+    return P._rootCreatePeriodicTimer(t1, null, t1, duration, t1.bindUnaryCallback$2$runGuarded(callback, true));
+  },
   _createTimer: function(duration, callback) {
     var milliseconds = C.JSInt_methods._tdivFast$1(duration._duration, 1000);
     return H.TimerImpl$(milliseconds < 0 ? 0 : milliseconds, callback);
@@ -3382,6 +3428,13 @@ var $$ = {};
   },
   _rootCreateTimer: function($self, $parent, zone, duration, callback) {
     return P._createTimer(duration, C.C__RootZone !== zone ? zone.bindCallback$1(callback) : callback);
+  },
+  _rootCreatePeriodicTimer: function($self, $parent, zone, duration, callback) {
+    var milliseconds;
+    if (C.C__RootZone !== zone)
+      callback = zone.bindUnaryCallback$1(callback);
+    milliseconds = C.JSInt_methods._tdivFast$1(duration._duration, 1000);
+    return H.TimerImpl$periodic(milliseconds < 0 ? 0 : milliseconds, callback);
   },
   _AsyncRun__scheduleImmediateJsOverride_internalCallback: {
     "^": "Closure:9;callback_0",
@@ -4485,6 +4538,9 @@ var $$ = {};
       return this.future_0._complete$1(this.value_1);
     }
   },
+  Timer: {
+    "^": "Object;"
+  },
   _BaseZone: {
     "^": "Object;",
     runGuarded$1: function(f) {
@@ -4529,6 +4585,9 @@ var $$ = {};
         return new P._BaseZone_bindUnaryCallback_closure(this, registered);
       else
         return new P._BaseZone_bindUnaryCallback_closure0(this, registered);
+    },
+    bindUnaryCallback$1: function(f) {
+      return this.bindUnaryCallback$2$runGuarded(f, true);
     }
   },
   _BaseZone_bindCallback_closure: {
@@ -5491,6 +5550,16 @@ var $$ = {};
         ++count;
       return count;
     },
+    get$single: function(_) {
+      var it, result;
+      it = this.get$iterator(this);
+      if (!it.moveNext$0())
+        throw H.wrapException(H.IterableElementError_noElement());
+      result = it.get$current();
+      if (it.moveNext$0())
+        throw H.wrapException(H.IterableElementError_tooMany());
+      return result;
+    },
     elementAt$1: function(_, index) {
       var t1, remaining, element;
       if (index < 0)
@@ -5854,6 +5923,9 @@ var $$ = {};
     var line = H.S(object);
     H.printString(line);
   },
+  _combineSurrogatePair: function(start, end) {
+    return 65536 + ((start & 1023) << 10 >>> 0) + (end & 1023);
+  },
   NoSuchMethodError_toString_closure: {
     "^": "Closure:18;box_0",
     call$2: function(key, value) {
@@ -5963,7 +6035,9 @@ var $$ = {};
     toString$0: function(_) {
       return "RangeError: " + H.S(this.message);
     },
-    static: {RangeError$value: function(value) {
+    static: {RangeError$: function(message) {
+        return new P.RangeError(message);
+      }, RangeError$value: function(value) {
         return new P.RangeError("value " + H.S(value));
       }, RangeError$range: function(value, start, end) {
         return new P.RangeError("value " + H.S(value) + " not in range " + start + ".." + H.S(end));
@@ -6126,6 +6200,45 @@ var $$ = {};
     $isString: true
   },
   "+String": 0,
+  Runes: {
+    "^": "IterableBase;string",
+    get$iterator: function(_) {
+      return new P.RuneIterator(this.string, 0, 0, null);
+    },
+    $asIterableBase: function() {
+      return [P.$int];
+    }
+  },
+  RuneIterator: {
+    "^": "Object;string,_core$_position,_nextPosition,_currentCodePoint",
+    get$current: function() {
+      return this._currentCodePoint;
+    },
+    moveNext$0: function() {
+      var t1, t2, t3, codeUnit, nextPosition, nextCodeUnit;
+      t1 = this._nextPosition;
+      this._core$_position = t1;
+      t2 = this.string;
+      t3 = t2.length;
+      if (t1 === t3) {
+        this._currentCodePoint = null;
+        return false;
+      }
+      codeUnit = C.JSString_methods.codeUnitAt$1(t2, t1);
+      nextPosition = this._core$_position + 1;
+      if ((codeUnit & 64512) === 55296 && nextPosition < t3) {
+        nextCodeUnit = C.JSString_methods.codeUnitAt$1(t2, nextPosition);
+        if ((nextCodeUnit & 64512) === 56320) {
+          this._nextPosition = nextPosition + 1;
+          this._currentCodePoint = P._combineSurrogatePair(codeUnit, nextCodeUnit);
+          return true;
+        }
+      }
+      this._nextPosition = nextPosition;
+      this._currentCodePoint = codeUnit;
+      return true;
+    }
+  },
   StringBuffer: {
     "^": "Object;_contents<",
     get$length: function(_) {
@@ -6538,6 +6651,20 @@ var $$ = {};
       }}
   }
 }],
+["dart.math", "dart:math", , P, {
+  "^": "",
+  _JSRandom: {
+    "^": "Object;",
+    nextInt$1: function(max) {
+      if (max <= 0 || max > 4294967296)
+        throw H.wrapException(P.RangeError$("max must be in range 0 < max \u2264 2^32, was " + max));
+      return Math.random() * max >>> 0;
+    },
+    nextDouble$0: function() {
+      return Math.random();
+    }
+  }
+}],
 ["dart.typed_data.implementation", "dart:_native_typed_data", , H, {
   "^": "",
   NativeTypedData: {
@@ -6667,6 +6794,42 @@ var $$ = {};
     }
   }
 }],
+["text_interpolate", "package:text_interpolate/text_interpolate.dart", , N, {
+  "^": "",
+  interpolate: function(from, to, progress) {
+    var t1, fromRunes, fromLength, toRunes, toLength, $length, buffer, i, $char;
+    if (progress <= 0)
+      return from;
+    if (progress >= 1)
+      return to;
+    from.toString;
+    t1 = new P.Runes(from);
+    fromRunes = P.List_List$from(t1, false, H.getRuntimeTypeArgument(t1, "IterableBase", 0));
+    fromLength = fromRunes.length;
+    t1 = J.get$runes$s(to);
+    toRunes = P.List_List$from(t1, false, H.getRuntimeTypeArgument(t1, "IterableBase", 0));
+    toLength = toRunes.length;
+    $length = fromLength + C.JSNumber_methods.toInt$0((toLength - fromLength) * progress);
+    buffer = P.StringBuffer$("");
+    for (i = 0; i < $length; ++i) {
+      t1 = i / $length;
+      if ($.get$_random().nextDouble$0() > progress) {
+        t1 = C.JSNumber_methods.toInt$0(Math.floor(t1 * fromLength));
+        if (t1 < 0 || t1 >= fromRunes.length)
+          return H.ioore(fromRunes, t1);
+        $char = fromRunes[t1];
+      } else {
+        t1 = C.JSNumber_methods.toInt$0(Math.floor(t1 * toLength));
+        if (t1 < 0 || t1 >= toRunes.length)
+          return H.ioore(toRunes, t1);
+        $char = toRunes[t1];
+      }
+      t1 = H.Primitives_stringFromCharCode($char);
+      buffer._contents += t1;
+    }
+    return buffer._contents;
+  }
+}],
 ["world_problems", "package:world_problems/world_problems.dart", , U, {
   "^": "",
   WorldProblem: {
@@ -6713,29 +6876,97 @@ var $$ = {};
     }
   },
   PageView: {
-    "^": "Object;reload,first,third"
+    "^": "Object;reload,first,third",
+    _startReloadProblemViewTween$1: function(view) {
+      var random, from;
+      random = P.StringBuffer$("");
+      from = view.text.textContent;
+      from.toString;
+      new P.Runes(from).forEach$1(0, new U.PageView__startReloadProblemViewTween_closure(random));
+      view.startRandomTextTweening$3(from, random._contents, true);
+    },
+    static: {"^": "PageView_SPACE_CHAR,PageView_LETTERS,PageView__random"}
+  },
+  PageView__startReloadProblemViewTween_closure: {
+    "^": "Closure:20;random_0",
+    call$1: function($char) {
+      var t1, t2, t3;
+      t1 = $.get$PageView_SPACE_CHAR();
+      t2 = this.random_0;
+      if (J.$eq($char, t1))
+        t2.write$1(H.Primitives_stringFromCharCode(t1));
+      else {
+        t1 = $.get$PageView_LETTERS();
+        t3 = $.get$PageView__random().nextInt$1(t1.length);
+        if (t3 < 0 || t3 >= t1.length)
+          return H.ioore(t1, t3);
+        t2.write$1(H.Primitives_stringFromCharCode(t1[t3]));
+      }
+    }
   },
   ProblemView: {
-    "^": "Object;text,author,sourceAnchor",
-    update$1: function(problem) {
-      this.text.textContent = problem.text;
+    "^": "Object;text,author,sourceAnchor,_timer",
+    update$2$withTweening: function(problem, withTweening) {
+      var t1;
+      if (!withTweening) {
+        t1 = this._timer;
+        if (t1 != null) {
+          t1.cancel$0();
+          this._timer = null;
+        }
+        this.text.textContent = problem.text;
+      } else
+        this.startRandomTextTweening$3(this.text.textContent, problem.text, false);
       this.author.textContent = "\u2013 " + H.S(problem.author);
       J.set$href$x(this.sourceAnchor, problem.url);
       this.sourceAnchor.textContent = problem.source;
+    },
+    startRandomTextTweening$3: function(from, to, keepRunning) {
+      var t1, t2;
+      t1 = {};
+      t2 = this._timer;
+      if (t2 != null) {
+        t2.cancel$0();
+        this._timer = null;
+      }
+      t1.progress_0 = 0;
+      this._timer = P.Timer_Timer$periodic(C.Duration_20000, new U.ProblemView_startRandomTextTweening_closure(t1, this, from, to, keepRunning));
     },
     ProblemView$1: function(el) {
       this.text = el.querySelector(".text");
       this.author = el.querySelector(".author");
       this.sourceAnchor = el.querySelector(".url");
     },
-    static: {ProblemView$: function(el) {
-        var t1 = new U.ProblemView(null, null, null);
+    static: {"^": "ProblemView_TWEENING_REFRESH_RATE,ProblemView_TWEENING_STEP,ProblemView_TWEENING_KEEP_RUNNING_STOP", ProblemView$: function(el) {
+        var t1 = new U.ProblemView(null, null, null, null);
         t1.ProblemView$1(el);
         return t1;
       }}
   },
+  ProblemView_startRandomTextTweening_closure: {
+    "^": "Closure:21;box_0,this_1,from_2,to_3,keepRunning_4",
+    call$1: function(t) {
+      var t1, t2, t3, t4, t5;
+      t1 = this.this_1;
+      t2 = this.to_3;
+      t3 = this.box_0;
+      t1.text.textContent = N.interpolate(this.from_2, t2, t3.progress_0);
+      t4 = this.keepRunning_4;
+      if (!(t4 && t3.progress_0 < 0.5))
+        t5 = !t4 && t3.progress_0 < 1;
+      else
+        t5 = true;
+      if (t5)
+        t3.progress_0 += 0.02;
+      if (!t4 && t3.progress_0 >= 1) {
+        t1.text.textContent = t2;
+        t.cancel$0();
+        t1._timer = null;
+      }
+    }
+  },
   WorldProblemsApp: {
-    "^": "Object;fetcher,page,isInitialized,firstProblemsHistory,thirdProblemsHistory,maxHistory,_reloadDiv,reload",
+    "^": "Object;fetcher,page,isInitialized,firstProblemsHistory,thirdProblemsHistory,maxHistory,_reloadDiv,reload,currentFirst,currentThird",
     initialize$3: function(buttonId, firstId, thirdId) {
       var first, second, t1;
       this.reload = document.querySelector(buttonId);
@@ -6748,6 +6979,9 @@ var $$ = {};
       this.isInitialized = true;
     },
     refreshPair$0: function() {
+      var t1 = this.page;
+      t1._startReloadProblemViewTween$1(t1.first);
+      t1._startReloadProblemViewTween$1(t1.third);
       this.getRandomPair$0().then$1(new U.WorldProblemsApp_refreshPair_closure(this));
     },
     getRandomPair$0: function() {
@@ -6766,7 +7000,7 @@ var $$ = {};
     static: {"^": "WorldProblemsApp_pulseAnimationDuration"}
   },
   WorldProblemsApp_initialize_closure: {
-    "^": "Closure:20;this_0",
+    "^": "Closure:22;this_0",
     call$1: function(ev) {
       var t1 = this.this_0;
       J.get$classes$x(t1._reloadDiv).add$1(0, "pulse");
@@ -6782,15 +7016,20 @@ var $$ = {};
     }
   },
   WorldProblemsApp_refreshPair_closure: {
-    "^": "Closure:21;this_0",
+    "^": "Closure:23;this_0",
     call$1: function(pair) {
-      var t1 = this.this_0.page;
-      t1.first.update$1(pair.get$firstProblem());
-      t1.third.update$1(pair.thirdProblem);
+      var t1, t2;
+      t1 = this.this_0;
+      t1.currentFirst = pair.get$firstProblem();
+      t2 = pair.thirdProblem;
+      t1.currentThird = t2;
+      t1 = t1.page;
+      t1.first.update$2$withTweening(pair.firstProblem, true);
+      t1.third.update$2$withTweening(t2, true);
     }
   },
   WorldProblemsApp_getRandomPair_closure: {
-    "^": "Closure:21;this_0",
+    "^": "Closure:23;this_0",
     call$1: function(pair) {
       var t1, t2, t3;
       t1 = this.this_0;
@@ -6812,7 +7051,7 @@ var $$ = {};
   main: [function() {
     var fetcher, app;
     fetcher = new U.Fetcher("/_ah/api/problems/v1/random");
-    app = new U.WorldProblemsApp(fetcher, null, null, null, null, 1, null, null);
+    app = new U.WorldProblemsApp(fetcher, null, null, null, null, 1, null, null, null, null);
     app.WorldProblemsApp$2$maxHistory(fetcher, 1);
     app.initialize$3("#reload-button", ".first-world", ".third-world");
     if (!app.isInitialized)
@@ -6848,6 +7087,8 @@ U.WorldProblemsPair.$isWorldProblemsPair = true;
 U.WorldProblemsPair.$isObject = true;
 P.StackTrace.$isStackTrace = true;
 P.StackTrace.$isObject = true;
+P.Timer.$isTimer = true;
+P.Timer.$isObject = true;
 P.Function.$isFunction = true;
 P.Function.$isObject = true;
 P._EventSink.$is_EventSink = true;
@@ -7000,6 +7241,9 @@ J.get$onClick$x = function(receiver) {
 J.get$responseText$x = function(receiver) {
   return J.getInterceptor$x(receiver).get$responseText(receiver);
 };
+J.get$runes$s = function(receiver) {
+  return J.getInterceptor$s(receiver).get$runes(receiver);
+};
 J.preventDefault$0$x = function(receiver) {
   return J.getInterceptor$x(receiver).preventDefault$0(receiver);
 };
@@ -7033,9 +7277,11 @@ C.PlainJavaScriptObject_methods = J.PlainJavaScriptObject.prototype;
 C.UnknownJavaScriptObject_methods = J.UnknownJavaScriptObject.prototype;
 C.C_DynamicRuntimeType = new H.DynamicRuntimeType();
 C.C__DelayedDone = new P._DelayedDone();
+C.C__JSRandom = new P._JSRandom();
 C.C__RootZone = new P._RootZone();
 C.Duration_0 = new P.Duration(0);
 C.Duration_1200000 = new P.Duration(1200000);
+C.Duration_20000 = new P.Duration(20000);
 C.EventStreamProvider_click = new W.EventStreamProvider("click");
 C.EventStreamProvider_error = new W.EventStreamProvider("error");
 C.EventStreamProvider_load = new W.EventStreamProvider("load");
@@ -7292,6 +7538,20 @@ Isolate.$lazy($, "_nullFuture", "Future__nullFuture", "get$Future__nullFuture", 
 Isolate.$lazy($, "_toStringVisiting", "IterableBase__toStringVisiting", "get$IterableBase__toStringVisiting", function() {
   return [];
 });
+Isolate.$lazy($, "_random", "_random", "get$_random", function() {
+  return C.C__JSRandom;
+});
+Isolate.$lazy($, "SPACE_CHAR", "PageView_SPACE_CHAR", "get$PageView_SPACE_CHAR", function() {
+  var t1 = new P.Runes(" ");
+  return t1.get$single(t1);
+});
+Isolate.$lazy($, "LETTERS", "PageView_LETTERS", "get$PageView_LETTERS", function() {
+  var t1 = new P.Runes("abcdefghijklmnopqrstuvwxyz");
+  return P.List_List$from(t1, false, H.getRuntimeTypeArgument(t1, "IterableBase", 0));
+});
+Isolate.$lazy($, "_random", "PageView__random", "get$PageView__random", function() {
+  return C.C__JSRandom;
+});
 // Native classes
 
 init.functionAliases = {};
@@ -7316,6 +7576,8 @@ init.metadata = [{func: "void__void_", void: true, args: [{func: "void_", void: 
 {func: "dynamic__dynamic_StackTrace", args: [null, P.StackTrace]},
 {func: "dynamic__Symbol_dynamic", args: [P.Symbol, null]},
 {func: "String__int", ret: P.String, args: [P.$int]},
+{func: "dynamic__int", args: [P.$int]},
+{func: "dynamic__Timer", args: [P.Timer]},
 {func: "dynamic__MouseEvent", args: [W.MouseEvent]},
 {func: "dynamic__WorldProblemsPair", args: [U.WorldProblemsPair]},
 ];
