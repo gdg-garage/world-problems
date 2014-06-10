@@ -11,88 +11,85 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 
 
 html {
-  min-height: 100%;
-  background: #ddd;
-
+  background: #fff;
   font-family: Helvetica, sans-serif;
+  background:-webkit-gradient(linear,0 0,100% 100%,from(#fff),to(#eee));
+  background:-webkit-linear-gradient(    -45deg,    #fff  0%, #eee  100%  );
+  background:-moz-linear-gradient(    -45deg,    #fff  0%, #eee  100%  );
+  background:-o-linear-gradient(    -45deg,    #fff  0%, #eee  100%  );
+  background:linear-gradient(    135deg,    #fff  0%, #eee  100%  );
+  height: 100vh;
 }
 
 .separator {
+  height: 20vh;
+  /*
   background: white;
+  */
+}
+
+#reload-button {
+  position: absolute;
+  top: 40vh;
+  left: 20vw;
+  width: 60vw;
+  height: 20vh;
 }
 
 .button {
-  height: 6em;
-  width: 6em;
-
-  background-color: lightskyblue;
-  border: 1em solid #ddd;
-  -webkit-border-radius:100%;
-  -moz-border-radius:100%;
-  border-radius:100%;
-  
-  margin: 0 auto;
-  
-  text-align: center;
-
-  -webkit-transition:.1s ease-out;
-  -moz-transition:.1s ease-out;
-  -o-transition:.1s ease-out;
-  transition:.1s ease-out;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -18vw;
+  margin-top: -4.5vw;
 }
 
-.button:hover {
-  background-color: white;
+.button img {
+  width: 36vw;
+  height: 9vw;
 }
 
-.button:hover a {
-  color: lightskyblue;
-}
-
-.button a {
-  font-size: 1em;
-  position: relative;
-  top: 2.5em;
-
-  color: white;
-  text-decoration: none;
-  
-
-}
 
 .title {
   color: #333;
   font-size: 50%;
-  padding-top: 4em;
-  margin-bottom: 0.5em;
+  margin-bottom: 1vh;
 }
 
 .title span {
   /* Nothing until we find something very decent and non-distracting. */
 }
 
+.problem {
+  width: 100%;
+  height: 30vh;
+
+  color: #333333;
+
+  font-size: 4vh;
+  -webkit-hyphens: auto;
+}
+
 .first-world {
-  background:-webkit-gradient(linear,50% 100%,50% 0,from(#fff),to(#ddd));
-  background:-webkit-linear-gradient(    90deg,    #fff  0%, #ddd  100%  );
-  background:-moz-linear-gradient(    90deg,    #fff  0%, #ddd  100%  );
-  background:-o-linear-gradient(    90deg,    #fff  0%, #ddd  100%  );
-  background:linear-gradient(    0deg,    #fff  0%, #ddd  100%  );
-  
   text-align: left;
-  min-height: 10em;
-  
+
   padding-bottom: 5%;
+  
 }
 
 .third-world {
-  background:-webkit-gradient(linear,50% 0,50% 100%,from(#fff),to(#ddd));
-  background:-webkit-linear-gradient(    -90deg,    #fff  0%, #ddd  100%  );
-  background:-moz-linear-gradient(    -90deg,    #fff  0%, #ddd  100%  );
-  background:-o-linear-gradient(    -90deg,    #fff  0%, #ddd  100%  );
-  background:linear-gradient(    180deg,    #fff  0%, #ddd  100%  );
-  
   text-align: right;
-  min-height: 10em;
+}
+
+.problem-wrapper {
+  margin: 5vh;
+}
+
+.third-world .problem-wrapper {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .first-world .text {
@@ -103,29 +100,19 @@ html {
   padding-left: 2em;
 }
 
-.problem {
-  width: 100%;
-
-  color: #333333;
-
-  font-size: 24pt;
-  -webkit-hyphens: auto;
-}
-
-.problem > * {
-  margin-left: 10%;
-  margin-right: 10%;
-}
-
 .text {
   font-weight: bold;
 }
 
 .problem-footer {
-  margin-top: 0.5em;
+  margin-top: 0.5vh;
   width: 80%;
   line-height: 0.4em;
   color: #999;
+}
+
+.third-world .problem-footer {
+  margin-left: 20%;
 }
 
 .author {
@@ -136,12 +123,27 @@ html {
   font-size: 40%;
 }
 
-
-
 .source a {
   color: lightskyblue;
   text-transform: uppercase;
   text-decoration: none;
+}
+
+
+@media (max-width: 35em) { 
+  .button {
+    margin-left: -36vw;
+    margin-top: -9vw;
+  }
+  
+  .button img {
+    width: 72vw;
+    height: 18vw;
+  }
+  
+  .problem {
+    font-size: 3vh;
+  }
 }
 
 #footer {

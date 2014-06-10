@@ -7,7 +7,24 @@ ProblemsWorker api = new ProblemsWorker();
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>WorldProblems</title>
+  <title>WorldProblems &mash; a GDG Garage Project</title>
+  <!-- 
+      Oh hai. This is a GDG Garage project.
+
+      This was put together in a joint effort by the following people:
+
+        David Vavra, backend, Java + Cloud Endpoints
+        Jirka Penzes, frontend, Dart
+        Sindri Avaruus, frontend, HTML/CSS
+        Vit Pleskot, backend, Java + Cloud Endpoints
+        Filip Hracek, frontend, Dart + HTML/CSS
+
+      The project was a way for us to try out new things, in true
+      GDG Garage spirit.
+
+      Code: https://github.com/gdg-garage/world-problems
+      GDG Garage site: http://gdg-garage.github.io/
+  -->
   <link rel="stylesheet" href="style.css" type="text/css" media="screen">
   <link rel="stylesheet" href="animate.css" type="text/css" media="screen">
 </head>
@@ -29,9 +46,11 @@ ProblemsWorker api = new ProblemsWorker();
     </div>
   </div>
   <div class="separator">
-    <div class="button animated">
-      <a id="reload-button" href="index.html">RELOAD</a>
-    </div>
+    <a id="reload-button" href="index.html">
+      <div class="button animated">
+        <img src="world-problems.png" alt="RELOAD" />
+      </div>
+    </a>
   </div>
   <div class="third-world problem">
     <div class="problem-wrapper">
