@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cronentries>
 	<cron>
-		<url>/_ah/api/problems/v1/refresh-cache</url>
+		<url>https://world-problems.appspot.com/_ah/api/problems/v1/refresh-cache</url>
 		<description>Repopulate the cache every 30 minutes</description>
 		<schedule>every 30 minutes</schedule>
 	</cron>
