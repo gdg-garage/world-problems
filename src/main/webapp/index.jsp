@@ -29,7 +29,7 @@ ProblemsWorker api = new ProblemsWorker();
       GDG Garage site: http://gdg-garage.github.io/
   -->
   <link rel="stylesheet" href="style.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="animate.css" type="text/css" media="screen">
+  <link href='//fonts.googleapis.com/css?family=Open+Sans:300,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <div class="first-world problem">
@@ -49,9 +49,9 @@ ProblemsWorker api = new ProblemsWorker();
     </div>
   </div>
   <div class="separator">
-    <a id="reload-button" href="index.html">
+    <a id="reload-button" href="/">
       <div class="button animated">
-        <img src="world-problems.png" alt="RELOAD" />
+        <img src="world-problems-globe.svg" alt="RELOAD" />
       </div>
     </a>
   </div>
