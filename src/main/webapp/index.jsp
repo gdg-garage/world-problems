@@ -66,7 +66,7 @@ ProblemsWorker api = new ProblemsWorker();
           &mdash; <%= api.third().getAuthor() %>
         </span>
         <span class="source">
-          <a class="url" href="<%= api.third().getUrl() %>"><%= api.first().getSource() %></a>
+          <a class="url" href="<%= api.third().getUrl() %>"><%= api.third().getSource() %></a>
         </span>
       </p>
     </div>
